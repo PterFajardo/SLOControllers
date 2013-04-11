@@ -1,0 +1,2688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ifactorconsulting.com/webservices" xmlns:s1="http://www.ifactorconsulting.com/webservices/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.ifactorconsulting.com/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Use this service to report and manage incidents.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ifactorconsulting.com/webservices">
+      <s:element name="ReportIncident">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidenttype" type="tns:IncidentType" />
+            <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:float" />
+            <s:element minOccurs="0" maxOccurs="1" name="JSONAttributeData" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetdbID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="IncidentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="streetlight" />
+          <s:enumeration value="pothole" />
+          <s:enumeration value="hydrant" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ReportIncidentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReportIncidentResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConfirmIncident">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sloIncidentID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmIncidentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ConfirmIncidentResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResolveIncidentByCustomerID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerIncidentId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResolveIncidentByCustomerIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResolveIncidentByCustomerIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResolveIncidentBySLOID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sloIncidentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResolveIncidentBySLOIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResolveIncidentBySLOIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteIncident">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteIncidentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllIncidents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllIncidentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllIncidentsResult" type="tns:ArrayOfIFIncidentStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIFIncidentStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IFIncidentStructure" nillable="true" type="tns:IFIncidentStructure" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IFIncidentStructure">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="assetdbID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="incidenttype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="customerID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SLOID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSONData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="reporterName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="statustype" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="creation_time" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="creation_time_string" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="orgName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetIncidents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentType" type="tns:IncidentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="incidentStatus" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncidentsResult" type="tns:ArrayOfIncident" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIncident">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Incident" nillable="true" type="tns:Incident" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Incident">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AssetTypeDbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longtitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="JsonData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserDbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="StatusTypeDbid" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationDbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AssetDbId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportResult" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreationTime" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetIncidentsIDAndLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentType" type="tns:IncidentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="incidentStatus" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentsIDAndLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncidentsIDAndLocationResult" type="tns:ArrayOfIFPointSimpleStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIFPointSimpleStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IFPointSimpleStructure" nillable="true" type="tns:IFPointSimpleStructure" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IFPointSimpleStructure">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSONData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="assetid" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="orgName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetIncidentsIDAndLocationAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentType" type="tns:IncidentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="incidentStatus" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentsIDAndLocationAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncidentsIDAndLocationAsJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentsIDAndLocationAsJSONList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maximumRecordsPerListElement" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentType" type="tns:IncidentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="incidentStatus" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentsIDAndLocationAsJSONListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncidentsIDAndLocationAsJSONListResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFileToIncident">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="docbinaryarray" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="docname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFileToIncidentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddFileToIncidentResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDisplayXSL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="anIncidentType" type="tns:IncidentType" />
+            <s:element minOccurs="0" maxOccurs="1" name="XSLDocument">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDisplayXSLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetDisplayXSLResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayXSL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="anIncidentType" type="tns:IncidentType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayXSLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDisplayXSLResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayHTML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentDBID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayHTMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDisplayHTMLResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResubmitAllRejectedIncidents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResubmitAllRejectedIncidentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResubmitAllRejectedIncidentsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResubmitIncident">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SLOID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResubmitIncidentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResubmitIncidentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequestReverseGeocode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequestReverseGeocodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RequestReverseGeocodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkServiceareaBounds">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkServiceareaBoundsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="checkServiceareaBoundsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseIncidentBySLOID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sloIncidentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseIncidentBySLOIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CloseIncidentBySLOIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sloIncidentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncidentDetailsResult" type="tns:IFIncidentStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateComments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SLOID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCommentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCommentsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIncidentStatusBySLOID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SLOID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="statusType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIncidentStatusBySLOIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetIncidentStatusBySLOIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIncidentStatusByCustomerID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerIncidentId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="statusType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIncidentStatusByCustomerIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetIncidentStatusByCustomerIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllowableBounds">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllowableBoundsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllowableBoundsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllIncidentsByDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="statusType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllIncidentsByDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllIncidentsByDateResult" type="tns:ArrayOfIFIncidentStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllIncidentsByOrganizationAndDateRange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllIncidentsByOrganizationAndDateRangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllIncidentsByOrganizationAndDateRangeResult" type="tns:ArrayOfIncident" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTotalCountOfIncidents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="statusType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTotalCountOfIncidentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetTotalCountOfIncidentsResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOutOfSynchIncidents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOutOfSynchIncidentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOutOfSynchIncidentsResult" type="tns:ArrayOfIFIncidentStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SynchIncidentAssetIDs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="incidentID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SynchIncidentAssetIDsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SynchIncidentAssetIDsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfIFIncidentStructure" nillable="true" type="tns:ArrayOfIFIncidentStructure" />
+      <s:element name="ArrayOfIncident" nillable="true" type="tns:ArrayOfIncident" />
+      <s:element name="ArrayOfIFPointSimpleStructure" nillable="true" type="tns:ArrayOfIFPointSimpleStructure" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="IFIncidentStructure" nillable="true" type="tns:IFIncidentStructure" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+    <s:schema targetNamespace="http://www.ifactorconsulting.com/webservices/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReportIncidentSoapIn">
+    <wsdl:part name="parameters" element="tns:ReportIncident" />
+  </wsdl:message>
+  <wsdl:message name="ReportIncidentSoapOut">
+    <wsdl:part name="parameters" element="tns:ReportIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmIncidentSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmIncident" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmIncidentSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentByCustomerIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ResolveIncidentByCustomerID" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentByCustomerIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ResolveIncidentByCustomerIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentBySLOIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ResolveIncidentBySLOID" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentBySLOIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ResolveIncidentBySLOIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteIncidentSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteIncident" />
+  </wsdl:message>
+  <wsdl:message name="DeleteIncidentSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllIncidents" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllIncidentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncidents" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncidentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncidentsIDAndLocation" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncidentsIDAndLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncidentsIDAndLocationAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncidentsIDAndLocationAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncidentsIDAndLocationAsJSONList" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncidentsIDAndLocationAsJSONListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddFileToIncidentSoapIn">
+    <wsdl:part name="parameters" element="tns:AddFileToIncident" />
+  </wsdl:message>
+  <wsdl:message name="AddFileToIncidentSoapOut">
+    <wsdl:part name="parameters" element="tns:AddFileToIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDisplayXSLSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDisplayXSL" />
+  </wsdl:message>
+  <wsdl:message name="SetDisplayXSLSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDisplayXSLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDisplayXSL" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDisplayXSLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDisplayHTML" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDisplayHTMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitAllRejectedIncidentsSoapIn">
+    <wsdl:part name="parameters" element="tns:ResubmitAllRejectedIncidents" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitAllRejectedIncidentsSoapOut">
+    <wsdl:part name="parameters" element="tns:ResubmitAllRejectedIncidentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitIncidentSoapIn">
+    <wsdl:part name="parameters" element="tns:ResubmitIncident" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitIncidentSoapOut">
+    <wsdl:part name="parameters" element="tns:ResubmitIncidentResponse" />
+  </wsdl:message>
+  <wsdl:message name="RequestReverseGeocodeSoapIn">
+    <wsdl:part name="parameters" element="tns:RequestReverseGeocode" />
+  </wsdl:message>
+  <wsdl:message name="RequestReverseGeocodeSoapOut">
+    <wsdl:part name="parameters" element="tns:RequestReverseGeocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceareaBoundsSoapIn">
+    <wsdl:part name="parameters" element="tns:checkServiceareaBounds" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceareaBoundsSoapOut">
+    <wsdl:part name="parameters" element="tns:checkServiceareaBoundsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentBySLOIDSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseIncidentBySLOID" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentBySLOIDSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseIncidentBySLOIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncidentDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncidentDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCommentsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateComments" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCommentsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCommentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusBySLOIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SetIncidentStatusBySLOID" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusBySLOIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SetIncidentStatusBySLOIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusByCustomerIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SetIncidentStatusByCustomerID" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusByCustomerIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SetIncidentStatusByCustomerIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllowableBoundsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllowableBounds" />
+  </wsdl:message>
+  <wsdl:message name="GetAllowableBoundsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllowableBoundsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllIncidentsByDate" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllIncidentsByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByOrganizationAndDateRangeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllIncidentsByOrganizationAndDateRange" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByOrganizationAndDateRangeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllIncidentsByOrganizationAndDateRangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalCountOfIncidentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTotalCountOfIncidents" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalCountOfIncidentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTotalCountOfIncidentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOutOfSynchIncidentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutOfSynchIncidents" />
+  </wsdl:message>
+  <wsdl:message name="GetOutOfSynchIncidentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutOfSynchIncidentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SynchIncidentAssetIDsSoapIn">
+    <wsdl:part name="parameters" element="tns:SynchIncidentAssetIDs" />
+  </wsdl:message>
+  <wsdl:message name="SynchIncidentAssetIDsSoapOut">
+    <wsdl:part name="parameters" element="tns:SynchIncidentAssetIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReportIncidentHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidenttype" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+    <wsdl:part name="JSONAttributeData" type="s:string" />
+    <wsdl:part name="assetdbID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReportIncidentHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmIncidentHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmIncidentHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentByCustomerIDHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="customerIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentByCustomerIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentBySLOIDHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentBySLOIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeleteIncidentHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteIncidentHttpGetOut" />
+  <wsdl:message name="GetAllIncidentsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIncident" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONListHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="maximumRecordsPerListElement" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="AddFileToIncidentHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentID" type="s:string" />
+    <wsdl:part name="docbinaryarray" type="s1:StringArray" />
+    <wsdl:part name="docname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddFileToIncidentHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="anIncidentType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentDBID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitAllRejectedIncidentsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitAllRejectedIncidentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitIncidentHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="SLOID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitIncidentHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestReverseGeocodeHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestReverseGeocodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceareaBoundsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceareaBoundsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentBySLOIDHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentBySLOIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentDetailsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:IFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCommentsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="SLOID" type="s:string" />
+    <wsdl:part name="comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCommentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusBySLOIDHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="SLOID" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusBySLOIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusByCustomerIDHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="customerIncidentId" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusByCustomerIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetAllowableBoundsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllowableBoundsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByDateHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByDateHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByOrganizationAndDateRangeHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByOrganizationAndDateRangeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIncident" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalCountOfIncidentsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalCountOfIncidentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetOutOfSynchIncidentsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOutOfSynchIncidentsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="SynchIncidentAssetIDsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SynchIncidentAssetIDsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReportIncidentHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidenttype" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+    <wsdl:part name="JSONAttributeData" type="s:string" />
+    <wsdl:part name="assetdbID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReportIncidentHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmIncidentHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmIncidentHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentByCustomerIDHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="customerIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentByCustomerIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentBySLOIDHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResolveIncidentBySLOIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeleteIncidentHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteIncidentHttpPostOut" />
+  <wsdl:message name="GetAllIncidentsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIncident" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONListHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="maximumRecordsPerListElement" type="s:string" />
+    <wsdl:part name="incidentType" type="s:string" />
+    <wsdl:part name="incidentStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentsIDAndLocationAsJSONListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="AddFileToIncidentHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentID" type="s:string" />
+    <wsdl:part name="docbinaryarray" type="s1:StringArray" />
+    <wsdl:part name="docname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddFileToIncidentHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="anIncidentType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentDBID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitAllRejectedIncidentsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitAllRejectedIncidentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitIncidentHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="SLOID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResubmitIncidentHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestReverseGeocodeHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestReverseGeocodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceareaBoundsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceareaBoundsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentBySLOIDHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloseIncidentBySLOIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentDetailsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sloIncidentId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:IFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCommentsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="SLOID" type="s:string" />
+    <wsdl:part name="comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCommentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusBySLOIDHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="SLOID" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusBySLOIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusByCustomerIDHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="customerIncidentId" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentStatusByCustomerIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetAllowableBoundsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllowableBoundsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByDateHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByDateHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByOrganizationAndDateRangeHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllIncidentsByOrganizationAndDateRangeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIncident" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalCountOfIncidentsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="statusType" type="s:string" />
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalCountOfIncidentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetOutOfSynchIncidentsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOutOfSynchIncidentsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFIncidentStructure" />
+  </wsdl:message>
+  <wsdl:message name="SynchIncidentAssetIDsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SynchIncidentAssetIDsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="IFIncidentServiceSoap">
+    <wsdl:operation name="ReportIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Report an incident.  You will receive an incident ID in return.</wsdl:documentation>
+      <wsdl:input message="tns:ReportIncidentSoapIn" />
+      <wsdl:output message="tns:ReportIncidentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Confirm an incident.  Only available for authorized utility customers to confirm a reported incident.</wsdl:documentation>
+      <wsdl:input message="tns:ConfirmIncidentSoapIn" />
+      <wsdl:output message="tns:ConfirmIncidentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'resolved'.  The incident is referenced by a customer-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:ResolveIncidentByCustomerIDSoapIn" />
+      <wsdl:output message="tns:ResolveIncidentByCustomerIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'resolved'.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:ResolveIncidentBySLOIDSoapIn" />
+      <wsdl:output message="tns:ResolveIncidentBySLOIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete an incident if TOKEN is authorised to do it.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteIncidentSoapIn" />
+      <wsdl:output message="tns:DeleteIncidentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsSoapIn" />
+      <wsdl:output message="tns:GetAllIncidentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsSoapIn" />
+      <wsdl:output message="tns:GetIncidentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a subset of incident information of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will have the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationSoapIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationAsJSONSoapIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;This is the same as GetIncidentsIDAndLocationAsJSON &lt;b&gt;&lt;i&gt;except&lt;/i&gt;&lt;/b&gt; the JSON string is broken into shorter segments,each segment being put in its own list element.  It seems that for some large JSON strings, that the User-sideJSON parsers do not play very well so we provide this functionality to control the maximum JSON string size.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationAsJSONListSoapIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationAsJSONListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a file DOCNAME and associate it to incidentID.</wsdl:documentation>
+      <wsdl:input message="tns:AddFileToIncidentSoapIn" />
+      <wsdl:output message="tns:AddFileToIncidentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds an XSL mapping that can be used for an incident type for this organization.</wsdl:documentation>
+      <wsdl:input message="tns:SetDisplayXSLSoapIn" />
+      <wsdl:output message="tns:SetDisplayXSLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an XSL mapping that can be used for an asset type for this organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayXSLSoapIn" />
+      <wsdl:output message="tns:GetDisplayXSLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayHTMLSoapIn" />
+      <wsdl:output message="tns:GetDisplayHTMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits all the rejected incidents for the organization</wsdl:documentation>
+      <wsdl:input message="tns:ResubmitAllRejectedIncidentsSoapIn" />
+      <wsdl:output message="tns:ResubmitAllRejectedIncidentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits incident</wsdl:documentation>
+      <wsdl:input message="tns:ResubmitIncidentSoapIn" />
+      <wsdl:output message="tns:ResubmitIncidentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a street address for the given latitude and longitude</wsdl:documentation>
+      <wsdl:input message="tns:RequestReverseGeocodeSoapIn" />
+      <wsdl:output message="tns:RequestReverseGeocodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits incident</wsdl:documentation>
+      <wsdl:input message="tns:checkServiceareaBoundsSoapIn" />
+      <wsdl:output message="tns:checkServiceareaBoundsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'closed'.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:CloseIncidentBySLOIDSoapIn" />
+      <wsdl:output message="tns:CloseIncidentBySLOIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get associated details of an incident.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentDetailsSoapIn" />
+      <wsdl:output message="tns:GetIncidentDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update comment for a given incidents. Only available for authorized utility customers to include additional comments for an incident. </wsdl:documentation>
+      <wsdl:input message="tns:UpdateCommentsSoapIn" />
+      <wsdl:output message="tns:UpdateCommentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">set incident status by incidentid. Only available for authorized utility customers to update status for an incident.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentStatusBySLOIDSoapIn" />
+      <wsdl:output message="tns:SetIncidentStatusBySLOIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">set incident status by customerid. Only available for authorized utility customers to update status for an incident.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentStatusByCustomerIDSoapIn" />
+      <wsdl:output message="tns:SetIncidentStatusByCustomerIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Allowable Bounds from userToken</wsdl:documentation>
+      <wsdl:input message="tns:GetAllowableBoundsSoapIn" />
+      <wsdl:output message="tns:GetAllowableBoundsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsByDateSoapIn" />
+      <wsdl:output message="tns:GetAllIncidentsByDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsByOrganizationAndDateRangeSoapIn" />
+      <wsdl:output message="tns:GetAllIncidentsByOrganizationAndDateRangeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns total count of incidents within the date range</wsdl:documentation>
+      <wsdl:input message="tns:GetTotalCountOfIncidentsSoapIn" />
+      <wsdl:output message="tns:GetTotalCountOfIncidentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ADMIN ONLY</wsdl:documentation>
+      <wsdl:input message="tns:GetOutOfSynchIncidentsSoapIn" />
+      <wsdl:output message="tns:GetOutOfSynchIncidentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ADMIN ONLY</wsdl:documentation>
+      <wsdl:input message="tns:SynchIncidentAssetIDsSoapIn" />
+      <wsdl:output message="tns:SynchIncidentAssetIDsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IFIncidentServiceHttpGet">
+    <wsdl:operation name="ReportIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Report an incident.  You will receive an incident ID in return.</wsdl:documentation>
+      <wsdl:input message="tns:ReportIncidentHttpGetIn" />
+      <wsdl:output message="tns:ReportIncidentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Confirm an incident.  Only available for authorized utility customers to confirm a reported incident.</wsdl:documentation>
+      <wsdl:input message="tns:ConfirmIncidentHttpGetIn" />
+      <wsdl:output message="tns:ConfirmIncidentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'resolved'.  The incident is referenced by a customer-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:ResolveIncidentByCustomerIDHttpGetIn" />
+      <wsdl:output message="tns:ResolveIncidentByCustomerIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'resolved'.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:ResolveIncidentBySLOIDHttpGetIn" />
+      <wsdl:output message="tns:ResolveIncidentBySLOIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete an incident if TOKEN is authorised to do it.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteIncidentHttpGetIn" />
+      <wsdl:output message="tns:DeleteIncidentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsHttpGetIn" />
+      <wsdl:output message="tns:GetAllIncidentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsHttpGetIn" />
+      <wsdl:output message="tns:GetIncidentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a subset of incident information of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will have the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationHttpGetIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationAsJSONHttpGetIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationAsJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;This is the same as GetIncidentsIDAndLocationAsJSON &lt;b&gt;&lt;i&gt;except&lt;/i&gt;&lt;/b&gt; the JSON string is broken into shorter segments,each segment being put in its own list element.  It seems that for some large JSON strings, that the User-sideJSON parsers do not play very well so we provide this functionality to control the maximum JSON string size.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationAsJSONListHttpGetIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationAsJSONListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a file DOCNAME and associate it to incidentID.</wsdl:documentation>
+      <wsdl:input message="tns:AddFileToIncidentHttpGetIn" />
+      <wsdl:output message="tns:AddFileToIncidentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an XSL mapping that can be used for an asset type for this organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayXSLHttpGetIn" />
+      <wsdl:output message="tns:GetDisplayXSLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayHTMLHttpGetIn" />
+      <wsdl:output message="tns:GetDisplayHTMLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits all the rejected incidents for the organization</wsdl:documentation>
+      <wsdl:input message="tns:ResubmitAllRejectedIncidentsHttpGetIn" />
+      <wsdl:output message="tns:ResubmitAllRejectedIncidentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits incident</wsdl:documentation>
+      <wsdl:input message="tns:ResubmitIncidentHttpGetIn" />
+      <wsdl:output message="tns:ResubmitIncidentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a street address for the given latitude and longitude</wsdl:documentation>
+      <wsdl:input message="tns:RequestReverseGeocodeHttpGetIn" />
+      <wsdl:output message="tns:RequestReverseGeocodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits incident</wsdl:documentation>
+      <wsdl:input message="tns:checkServiceareaBoundsHttpGetIn" />
+      <wsdl:output message="tns:checkServiceareaBoundsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'closed'.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:CloseIncidentBySLOIDHttpGetIn" />
+      <wsdl:output message="tns:CloseIncidentBySLOIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get associated details of an incident.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentDetailsHttpGetIn" />
+      <wsdl:output message="tns:GetIncidentDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update comment for a given incidents. Only available for authorized utility customers to include additional comments for an incident. </wsdl:documentation>
+      <wsdl:input message="tns:UpdateCommentsHttpGetIn" />
+      <wsdl:output message="tns:UpdateCommentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">set incident status by incidentid. Only available for authorized utility customers to update status for an incident.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentStatusBySLOIDHttpGetIn" />
+      <wsdl:output message="tns:SetIncidentStatusBySLOIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">set incident status by customerid. Only available for authorized utility customers to update status for an incident.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentStatusByCustomerIDHttpGetIn" />
+      <wsdl:output message="tns:SetIncidentStatusByCustomerIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Allowable Bounds from userToken</wsdl:documentation>
+      <wsdl:input message="tns:GetAllowableBoundsHttpGetIn" />
+      <wsdl:output message="tns:GetAllowableBoundsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsByDateHttpGetIn" />
+      <wsdl:output message="tns:GetAllIncidentsByDateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsByOrganizationAndDateRangeHttpGetIn" />
+      <wsdl:output message="tns:GetAllIncidentsByOrganizationAndDateRangeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns total count of incidents within the date range</wsdl:documentation>
+      <wsdl:input message="tns:GetTotalCountOfIncidentsHttpGetIn" />
+      <wsdl:output message="tns:GetTotalCountOfIncidentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ADMIN ONLY</wsdl:documentation>
+      <wsdl:input message="tns:GetOutOfSynchIncidentsHttpGetIn" />
+      <wsdl:output message="tns:GetOutOfSynchIncidentsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ADMIN ONLY</wsdl:documentation>
+      <wsdl:input message="tns:SynchIncidentAssetIDsHttpGetIn" />
+      <wsdl:output message="tns:SynchIncidentAssetIDsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IFIncidentServiceHttpPost">
+    <wsdl:operation name="ReportIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Report an incident.  You will receive an incident ID in return.</wsdl:documentation>
+      <wsdl:input message="tns:ReportIncidentHttpPostIn" />
+      <wsdl:output message="tns:ReportIncidentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Confirm an incident.  Only available for authorized utility customers to confirm a reported incident.</wsdl:documentation>
+      <wsdl:input message="tns:ConfirmIncidentHttpPostIn" />
+      <wsdl:output message="tns:ConfirmIncidentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'resolved'.  The incident is referenced by a customer-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:ResolveIncidentByCustomerIDHttpPostIn" />
+      <wsdl:output message="tns:ResolveIncidentByCustomerIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'resolved'.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:ResolveIncidentBySLOIDHttpPostIn" />
+      <wsdl:output message="tns:ResolveIncidentBySLOIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete an incident if TOKEN is authorised to do it.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteIncidentHttpPostIn" />
+      <wsdl:output message="tns:DeleteIncidentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsHttpPostIn" />
+      <wsdl:output message="tns:GetAllIncidentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsHttpPostIn" />
+      <wsdl:output message="tns:GetIncidentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a subset of incident information of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will have the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationHttpPostIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationAsJSONHttpPostIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationAsJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all incidents of a give incidentType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;This is the same as GetIncidentsIDAndLocationAsJSON &lt;b&gt;&lt;i&gt;except&lt;/i&gt;&lt;/b&gt; the JSON string is broken into shorter segments,each segment being put in its own list element.  It seems that for some large JSON strings, that the User-sideJSON parsers do not play very well so we provide this functionality to control the maximum JSON string size.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentsIDAndLocationAsJSONListHttpPostIn" />
+      <wsdl:output message="tns:GetIncidentsIDAndLocationAsJSONListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a file DOCNAME and associate it to incidentID.</wsdl:documentation>
+      <wsdl:input message="tns:AddFileToIncidentHttpPostIn" />
+      <wsdl:output message="tns:AddFileToIncidentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an XSL mapping that can be used for an asset type for this organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayXSLHttpPostIn" />
+      <wsdl:output message="tns:GetDisplayXSLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayHTMLHttpPostIn" />
+      <wsdl:output message="tns:GetDisplayHTMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits all the rejected incidents for the organization</wsdl:documentation>
+      <wsdl:input message="tns:ResubmitAllRejectedIncidentsHttpPostIn" />
+      <wsdl:output message="tns:ResubmitAllRejectedIncidentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits incident</wsdl:documentation>
+      <wsdl:input message="tns:ResubmitIncidentHttpPostIn" />
+      <wsdl:output message="tns:ResubmitIncidentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a street address for the given latitude and longitude</wsdl:documentation>
+      <wsdl:input message="tns:RequestReverseGeocodeHttpPostIn" />
+      <wsdl:output message="tns:RequestReverseGeocodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resubmits incident</wsdl:documentation>
+      <wsdl:input message="tns:checkServiceareaBoundsHttpPostIn" />
+      <wsdl:output message="tns:checkServiceareaBoundsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks an incident as 'closed'.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:CloseIncidentBySLOIDHttpPostIn" />
+      <wsdl:output message="tns:CloseIncidentBySLOIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get associated details of an incident.  The incident is referenced by a StreetLightOutages-specific incident ID.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentDetailsHttpPostIn" />
+      <wsdl:output message="tns:GetIncidentDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update comment for a given incidents. Only available for authorized utility customers to include additional comments for an incident. </wsdl:documentation>
+      <wsdl:input message="tns:UpdateCommentsHttpPostIn" />
+      <wsdl:output message="tns:UpdateCommentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">set incident status by incidentid. Only available for authorized utility customers to update status for an incident.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentStatusBySLOIDHttpPostIn" />
+      <wsdl:output message="tns:SetIncidentStatusBySLOIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">set incident status by customerid. Only available for authorized utility customers to update status for an incident.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentStatusByCustomerIDHttpPostIn" />
+      <wsdl:output message="tns:SetIncidentStatusByCustomerIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Allowable Bounds from userToken</wsdl:documentation>
+      <wsdl:input message="tns:GetAllowableBoundsHttpPostIn" />
+      <wsdl:output message="tns:GetAllowableBoundsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsByDateHttpPostIn" />
+      <wsdl:output message="tns:GetAllIncidentsByDateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all incidents for the current userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllIncidentsByOrganizationAndDateRangeHttpPostIn" />
+      <wsdl:output message="tns:GetAllIncidentsByOrganizationAndDateRangeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns total count of incidents within the date range</wsdl:documentation>
+      <wsdl:input message="tns:GetTotalCountOfIncidentsHttpPostIn" />
+      <wsdl:output message="tns:GetTotalCountOfIncidentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ADMIN ONLY</wsdl:documentation>
+      <wsdl:input message="tns:GetOutOfSynchIncidentsHttpPostIn" />
+      <wsdl:output message="tns:GetOutOfSynchIncidentsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ADMIN ONLY</wsdl:documentation>
+      <wsdl:input message="tns:SynchIncidentAssetIDsHttpPostIn" />
+      <wsdl:output message="tns:SynchIncidentAssetIDsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IFIncidentServiceSoap" type="tns:IFIncidentServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReportIncident">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ReportIncident" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ConfirmIncident" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ResolveIncidentByCustomerID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ResolveIncidentBySLOID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/DeleteIncident" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllIncidents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentsIDAndLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentsIDAndLocationAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentsIDAndLocationAsJSONList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/AddFileToIncident" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDisplayXSL">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayHTML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ResubmitAllRejectedIncidents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ResubmitIncident" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/RequestReverseGeocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/checkServiceareaBounds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/CloseIncidentBySLOID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/UpdateComments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetIncidentStatusBySLOID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetIncidentStatusByCustomerID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllowableBounds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllIncidentsByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllIncidentsByOrganizationAndDateRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetTotalCountOfIncidents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOutOfSynchIncidents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SynchIncidentAssetIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFIncidentServiceSoap12" type="tns:IFIncidentServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReportIncident">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ReportIncident" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ConfirmIncident" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ResolveIncidentByCustomerID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ResolveIncidentBySLOID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/DeleteIncident" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllIncidents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentsIDAndLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentsIDAndLocationAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentsIDAndLocationAsJSONList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/AddFileToIncident" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDisplayXSL">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayHTML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ResubmitAllRejectedIncidents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ResubmitIncident" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/RequestReverseGeocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/checkServiceareaBounds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/CloseIncidentBySLOID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/UpdateComments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetIncidentStatusBySLOID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetIncidentStatusByCustomerID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllowableBounds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllIncidentsByDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAllIncidentsByOrganizationAndDateRange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetTotalCountOfIncidents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOutOfSynchIncidents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SynchIncidentAssetIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFIncidentServiceHttpGet" type="tns:IFIncidentServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ReportIncident">
+      <http:operation location="/ReportIncident" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <http:operation location="/ConfirmIncident" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <http:operation location="/ResolveIncidentByCustomerID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <http:operation location="/ResolveIncidentBySLOID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <http:operation location="/DeleteIncident" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <http:operation location="/GetAllIncidents" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <http:operation location="/GetIncidents" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <http:operation location="/GetIncidentsIDAndLocation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <http:operation location="/GetIncidentsIDAndLocationAsJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <http:operation location="/GetIncidentsIDAndLocationAsJSONList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <http:operation location="/AddFileToIncident" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <http:operation location="/GetDisplayXSL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <http:operation location="/GetDisplayHTML" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <http:operation location="/ResubmitAllRejectedIncidents" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <http:operation location="/ResubmitIncident" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <http:operation location="/RequestReverseGeocode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <http:operation location="/checkServiceareaBounds" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <http:operation location="/CloseIncidentBySLOID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <http:operation location="/GetIncidentDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <http:operation location="/UpdateComments" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <http:operation location="/SetIncidentStatusBySLOID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <http:operation location="/SetIncidentStatusByCustomerID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <http:operation location="/GetAllowableBounds" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <http:operation location="/GetAllIncidentsByDate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <http:operation location="/GetAllIncidentsByOrganizationAndDateRange" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <http:operation location="/GetTotalCountOfIncidents" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <http:operation location="/GetOutOfSynchIncidents" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <http:operation location="/SynchIncidentAssetIDs" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFIncidentServiceHttpPost" type="tns:IFIncidentServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ReportIncident">
+      <http:operation location="/ReportIncident" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmIncident">
+      <http:operation location="/ConfirmIncident" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentByCustomerID">
+      <http:operation location="/ResolveIncidentByCustomerID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveIncidentBySLOID">
+      <http:operation location="/ResolveIncidentBySLOID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteIncident">
+      <http:operation location="/DeleteIncident" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidents">
+      <http:operation location="/GetAllIncidents" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidents">
+      <http:operation location="/GetIncidents" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocation">
+      <http:operation location="/GetIncidentsIDAndLocation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSON">
+      <http:operation location="/GetIncidentsIDAndLocationAsJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentsIDAndLocationAsJSONList">
+      <http:operation location="/GetIncidentsIDAndLocationAsJSONList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFileToIncident">
+      <http:operation location="/AddFileToIncident" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <http:operation location="/GetDisplayXSL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <http:operation location="/GetDisplayHTML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitAllRejectedIncidents">
+      <http:operation location="/ResubmitAllRejectedIncidents" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResubmitIncident">
+      <http:operation location="/ResubmitIncident" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestReverseGeocode">
+      <http:operation location="/RequestReverseGeocode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkServiceareaBounds">
+      <http:operation location="/checkServiceareaBounds" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseIncidentBySLOID">
+      <http:operation location="/CloseIncidentBySLOID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentDetails">
+      <http:operation location="/GetIncidentDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateComments">
+      <http:operation location="/UpdateComments" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusBySLOID">
+      <http:operation location="/SetIncidentStatusBySLOID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentStatusByCustomerID">
+      <http:operation location="/SetIncidentStatusByCustomerID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowableBounds">
+      <http:operation location="/GetAllowableBounds" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByDate">
+      <http:operation location="/GetAllIncidentsByDate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIncidentsByOrganizationAndDateRange">
+      <http:operation location="/GetAllIncidentsByOrganizationAndDateRange" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountOfIncidents">
+      <http:operation location="/GetTotalCountOfIncidents" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutOfSynchIncidents">
+      <http:operation location="/GetOutOfSynchIncidents" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchIncidentAssetIDs">
+      <http:operation location="/SynchIncidentAssetIDs" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IFIncidentService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Use this service to report and manage incidents.</wsdl:documentation>
+    <wsdl:port name="IFIncidentServiceSoap" binding="tns:IFIncidentServiceSoap">
+      <soap:address location="http://localhost/webservices/IFIncidentService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFIncidentServiceSoap12" binding="tns:IFIncidentServiceSoap12">
+      <soap12:address location="http://localhost/webservices/IFIncidentService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFIncidentServiceHttpGet" binding="tns:IFIncidentServiceHttpGet">
+      <http:address location="http://localhost/webservices/IFIncidentService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFIncidentServiceHttpPost" binding="tns:IFIncidentServiceHttpPost">
+      <http:address location="http://localhost/webservices/IFIncidentService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

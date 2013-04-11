@@ -1,0 +1,1697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ifactorconsulting.com/webservices" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.ifactorconsulting.com/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Use this service to manage assets.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ifactorconsulting.com/webservices">
+      <s:element name="GetAssets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="AssetType">
+        <s:restriction base="s:string">
+          <s:enumeration value="streetlight" />
+          <s:enumeration value="hydrant" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetAssetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetsResult" type="tns:ArrayOfAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Asset" nillable="true" type="tns:Asset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Asset">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ForeignId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AssetTypeDbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longtitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="JsonData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceMetadataDbId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationDbId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PoleNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAssetsIDAndLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetsIDAndLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetsIDAndLocationResult" type="tns:ArrayOfIFPointSimpleStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIFPointSimpleStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IFPointSimpleStructure" nillable="true" type="tns:IFPointSimpleStructure" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IFPointSimpleStructure">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="longitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSONData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="assetid" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="orgName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAssetsIDAndLocationAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetsIDAndLocationAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetsIDAndLocationAsJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetsIDAndLocationAsJSONList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maximumRecordsPerListElement" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetsIDAndLocationAsJSONListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetsIDAndLocationAsJSONListResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddAssets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAssetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddAssetsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDisplayXSL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="anAssetType" type="tns:AssetType" />
+            <s:element minOccurs="0" maxOccurs="1" name="XSLDocument">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDisplayXSLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetDisplayXSLResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayXSL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="anAssetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayXSLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDisplayXSLResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayHTML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetDBID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDisplayHTMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDisplayHTMLResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStateAreaAsJSONList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStateAreaAsJSONListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStateAreaAsJSONListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountyAreaAsJSONList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountyAreaAsJSONListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountyAreaAsJSONListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCTVAreaAsJSONList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxLongitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="minLatitude" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="assetType" type="tns:AssetType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCTVAreaAsJSONListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCTVAreaAsJSONListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServiceAreaAsJSONList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServiceAreaAsJSONListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServiceAreaAsJSONListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="polenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetDetailsResult" type="tns:IFPointSimpleStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAssetsByMetadataID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="metedataID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAssetsByMetadataIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteAssetsByMetadataIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CleanupData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CleanupDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CleanupDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetDetailsAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="polenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetDetailsAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetDetailsAsJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetDetailsAsList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="polenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetDetailsAsListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetDetailsAsListResult" type="tns:ArrayOfIFPointSimpleStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetByDbId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dbId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssetByDbIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssetByDbIdResult" type="tns:ArrayOfAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfAsset" nillable="true" type="tns:ArrayOfAsset" />
+      <s:element name="ArrayOfIFPointSimpleStructure" nillable="true" type="tns:ArrayOfIFPointSimpleStructure" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="IFPointSimpleStructure" nillable="true" type="tns:IFPointSimpleStructure" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAssetsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssets" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetsIDAndLocation" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetsIDAndLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetsIDAndLocationAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetsIDAndLocationAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetsIDAndLocationAsJSONList" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetsIDAndLocationAsJSONListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAssetsSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAssets" />
+  </wsdl:message>
+  <wsdl:message name="AddAssetsSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAssetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDisplayXSLSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDisplayXSL" />
+  </wsdl:message>
+  <wsdl:message name="SetDisplayXSLSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDisplayXSLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDisplayXSL" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDisplayXSLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDisplayHTML" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDisplayHTMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStateAreaAsJSONListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStateAreaAsJSONList" />
+  </wsdl:message>
+  <wsdl:message name="GetStateAreaAsJSONListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStateAreaAsJSONListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountyAreaAsJSONListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountyAreaAsJSONList" />
+  </wsdl:message>
+  <wsdl:message name="GetCountyAreaAsJSONListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountyAreaAsJSONListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCTVAreaAsJSONListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCTVAreaAsJSONList" />
+  </wsdl:message>
+  <wsdl:message name="GetCTVAreaAsJSONListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCTVAreaAsJSONListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceAreaAsJSONListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServiceAreaAsJSONList" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceAreaAsJSONListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServiceAreaAsJSONListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAssetsByMetadataIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteAssetsByMetadataID" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAssetsByMetadataIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteAssetsByMetadataIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CleanupDataSoapIn">
+    <wsdl:part name="parameters" element="tns:CleanupData" />
+  </wsdl:message>
+  <wsdl:message name="CleanupDataSoapOut">
+    <wsdl:part name="parameters" element="tns:CleanupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetDetailsAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetDetailsAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetDetailsAsList" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetDetailsAsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetByDbIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssetByDbId" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetByDbIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssetByDbIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAsset" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONListHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="maximumRecordsPerListElement" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="AddAssetsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAssetsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="anAssetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="assetDBID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetStateAreaAsJSONListHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStateAreaAsJSONListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountyAreaAsJSONListHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountyAreaAsJSONListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCTVAreaAsJSONListHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCTVAreaAsJSONListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceAreaAsJSONListHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceAreaAsJSONListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsHttpGetIn">
+    <wsdl:part name="polenumber" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:IFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAssetsByMetadataIDHttpGetIn">
+    <wsdl:part name="metedataID" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAssetsByMetadataIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CleanupDataHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CleanupDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsJSONHttpGetIn">
+    <wsdl:part name="polenumber" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsJSONHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsListHttpGetIn">
+    <wsdl:part name="polenumber" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetByDbIdHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="dbId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetByDbIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAsset" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAsset" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONListHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="maximumRecordsPerListElement" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetsIDAndLocationAsJSONListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="AddAssetsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAssetsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="anAssetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayXSLHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="assetDBID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDisplayHTMLHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetStateAreaAsJSONListHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStateAreaAsJSONListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountyAreaAsJSONListHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountyAreaAsJSONListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCTVAreaAsJSONListHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="minLongitude" type="s:string" />
+    <wsdl:part name="maxLatitude" type="s:string" />
+    <wsdl:part name="maxLongitude" type="s:string" />
+    <wsdl:part name="minLatitude" type="s:string" />
+    <wsdl:part name="assetType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCTVAreaAsJSONListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceAreaAsJSONListHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceAreaAsJSONListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsHttpPostIn">
+    <wsdl:part name="polenumber" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:IFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAssetsByMetadataIDHttpPostIn">
+    <wsdl:part name="metedataID" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAssetsByMetadataIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CleanupDataHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CleanupDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsJSONHttpPostIn">
+    <wsdl:part name="polenumber" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsJSONHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsListHttpPostIn">
+    <wsdl:part name="polenumber" type="s:string" />
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetDetailsAsListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFPointSimpleStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetByDbIdHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="dbId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAssetByDbIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfAsset" />
+  </wsdl:message>
+  <wsdl:portType name="IFAssetServiceSoap">
+    <wsdl:operation name="GetAssets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all assets of a given assetType within the lat/lon bounding box described by the parameters.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsSoapIn" />
+      <wsdl:output message="tns:GetAssetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a subset of asset information of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will have the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationSoapIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationAsJSONSoapIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;This is the same as GetAssetsIDAndLocationAsJSON &lt;b&gt;&lt;i&gt;except&lt;/i&gt;&lt;/b&gt; the JSON string is broken into shorter segments,each segment being put in its own list element.  It seems that for some large JSON strings, that the User-sideJSON parsers do not play very well so we provide this functionality to control the maximum JSON string size.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationAsJSONListSoapIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationAsJSONListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a file DOCNAME and associate it to assetID.</wsdl:documentation>
+      <wsdl:input message="tns:AddAssetsSoapIn" />
+      <wsdl:output message="tns:AddAssetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds an XSL mapping that can be used for an asset type for this user's organization.</wsdl:documentation>
+      <wsdl:input message="tns:SetDisplayXSLSoapIn" />
+      <wsdl:output message="tns:SetDisplayXSLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an XSL mapping that can be used for an asset type for this user's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayXSLSoapIn" />
+      <wsdl:output message="tns:GetDisplayXSLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayHTMLSoapIn" />
+      <wsdl:output message="tns:GetDisplayHTMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetStateAreaAsJSONListSoapIn" />
+      <wsdl:output message="tns:GetStateAreaAsJSONListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetCountyAreaAsJSONListSoapIn" />
+      <wsdl:output message="tns:GetCountyAreaAsJSONListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetCTVAreaAsJSONListSoapIn" />
+      <wsdl:output message="tns:GetCTVAreaAsJSONListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetServiceAreaAsJSONListSoapIn" />
+      <wsdl:output message="tns:GetServiceAreaAsJSONListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its polenumber</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsSoapIn" />
+      <wsdl:output message="tns:GetAssetDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete Assets by Metadata ID</wsdl:documentation>
+      <wsdl:input message="tns:DeleteAssetsByMetadataIDSoapIn" />
+      <wsdl:output message="tns:DeleteAssetsByMetadataIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete Assets by Metadata ID</wsdl:documentation>
+      <wsdl:input message="tns:CleanupDataSoapIn" />
+      <wsdl:output message="tns:CleanupDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its polenumber</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsAsJSONSoapIn" />
+      <wsdl:output message="tns:GetAssetDetailsAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">For a given polenumber, return the details of all matching assets as a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsAsListSoapIn" />
+      <wsdl:output message="tns:GetAssetDetailsAsListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its dbid</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetByDbIdSoapIn" />
+      <wsdl:output message="tns:GetAssetByDbIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IFAssetServiceHttpGet">
+    <wsdl:operation name="GetAssets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all assets of a given assetType within the lat/lon bounding box described by the parameters.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsHttpGetIn" />
+      <wsdl:output message="tns:GetAssetsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a subset of asset information of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will have the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationHttpGetIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationAsJSONHttpGetIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationAsJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;This is the same as GetAssetsIDAndLocationAsJSON &lt;b&gt;&lt;i&gt;except&lt;/i&gt;&lt;/b&gt; the JSON string is broken into shorter segments,each segment being put in its own list element.  It seems that for some large JSON strings, that the User-sideJSON parsers do not play very well so we provide this functionality to control the maximum JSON string size.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationAsJSONListHttpGetIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationAsJSONListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a file DOCNAME and associate it to assetID.</wsdl:documentation>
+      <wsdl:input message="tns:AddAssetsHttpGetIn" />
+      <wsdl:output message="tns:AddAssetsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an XSL mapping that can be used for an asset type for this user's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayXSLHttpGetIn" />
+      <wsdl:output message="tns:GetDisplayXSLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayHTMLHttpGetIn" />
+      <wsdl:output message="tns:GetDisplayHTMLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetStateAreaAsJSONListHttpGetIn" />
+      <wsdl:output message="tns:GetStateAreaAsJSONListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetCountyAreaAsJSONListHttpGetIn" />
+      <wsdl:output message="tns:GetCountyAreaAsJSONListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetCTVAreaAsJSONListHttpGetIn" />
+      <wsdl:output message="tns:GetCTVAreaAsJSONListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetServiceAreaAsJSONListHttpGetIn" />
+      <wsdl:output message="tns:GetServiceAreaAsJSONListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its polenumber</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsHttpGetIn" />
+      <wsdl:output message="tns:GetAssetDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete Assets by Metadata ID</wsdl:documentation>
+      <wsdl:input message="tns:DeleteAssetsByMetadataIDHttpGetIn" />
+      <wsdl:output message="tns:DeleteAssetsByMetadataIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete Assets by Metadata ID</wsdl:documentation>
+      <wsdl:input message="tns:CleanupDataHttpGetIn" />
+      <wsdl:output message="tns:CleanupDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its polenumber</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsAsJSONHttpGetIn" />
+      <wsdl:output message="tns:GetAssetDetailsAsJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">For a given polenumber, return the details of all matching assets as a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsAsListHttpGetIn" />
+      <wsdl:output message="tns:GetAssetDetailsAsListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its dbid</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetByDbIdHttpGetIn" />
+      <wsdl:output message="tns:GetAssetByDbIdHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IFAssetServiceHttpPost">
+    <wsdl:operation name="GetAssets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an Array of all assets of a given assetType within the lat/lon bounding box described by the parameters.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsHttpPostIn" />
+      <wsdl:output message="tns:GetAssetsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a subset of asset information of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will have the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationHttpPostIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationAsJSONHttpPostIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationAsJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a JSON String of all assets of a give assetType within the lat/lon bounding box described by the parameters.&lt;br/&gt;The information returned will be JSON data with the following attributes:&lt;ul&gt;&lt;li&gt;id&lt;/li&gt;&lt;li&gt;latitude&lt;/li&gt;&lt;li&gt;longitude&lt;/li&gt;&lt;/ul&gt;This is the same as GetAssetsIDAndLocationAsJSON &lt;b&gt;&lt;i&gt;except&lt;/i&gt;&lt;/b&gt; the JSON string is broken into shorter segments,each segment being put in its own list element.  It seems that for some large JSON strings, that the User-sideJSON parsers do not play very well so we provide this functionality to control the maximum JSON string size.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetsIDAndLocationAsJSONListHttpPostIn" />
+      <wsdl:output message="tns:GetAssetsIDAndLocationAsJSONListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Upload a file DOCNAME and associate it to assetID.</wsdl:documentation>
+      <wsdl:input message="tns:AddAssetsHttpPostIn" />
+      <wsdl:output message="tns:AddAssetsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an XSL mapping that can be used for an asset type for this user's organization.</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayXSLHttpPostIn" />
+      <wsdl:output message="tns:GetDisplayXSLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetDisplayHTMLHttpPostIn" />
+      <wsdl:output message="tns:GetDisplayHTMLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetStateAreaAsJSONListHttpPostIn" />
+      <wsdl:output message="tns:GetStateAreaAsJSONListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetCountyAreaAsJSONListHttpPostIn" />
+      <wsdl:output message="tns:GetCountyAreaAsJSONListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetCTVAreaAsJSONListHttpPostIn" />
+      <wsdl:output message="tns:GetCTVAreaAsJSONListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves an HTML document</wsdl:documentation>
+      <wsdl:input message="tns:GetServiceAreaAsJSONListHttpPostIn" />
+      <wsdl:output message="tns:GetServiceAreaAsJSONListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its polenumber</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsHttpPostIn" />
+      <wsdl:output message="tns:GetAssetDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete Assets by Metadata ID</wsdl:documentation>
+      <wsdl:input message="tns:DeleteAssetsByMetadataIDHttpPostIn" />
+      <wsdl:output message="tns:DeleteAssetsByMetadataIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Delete Assets by Metadata ID</wsdl:documentation>
+      <wsdl:input message="tns:CleanupDataHttpPostIn" />
+      <wsdl:output message="tns:CleanupDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its polenumber</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsAsJSONHttpPostIn" />
+      <wsdl:output message="tns:GetAssetDetailsAsJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">For a given polenumber, return the details of all matching assets as a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetDetailsAsListHttpPostIn" />
+      <wsdl:output message="tns:GetAssetDetailsAsListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">get details of an asset based on its dbid</wsdl:documentation>
+      <wsdl:input message="tns:GetAssetByDbIdHttpPostIn" />
+      <wsdl:output message="tns:GetAssetByDbIdHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IFAssetServiceSoap" type="tns:IFAssetServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAssets">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetsIDAndLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetsIDAndLocationAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetsIDAndLocationAsJSONList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/AddAssets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDisplayXSL">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayHTML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStateAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetCountyAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetCTVAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetServiceAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/DeleteAssetsByMetadataID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/CleanupData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetDetailsAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetDetailsAsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetByDbId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFAssetServiceSoap12" type="tns:IFAssetServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAssets">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetsIDAndLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetsIDAndLocationAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetsIDAndLocationAsJSONList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/AddAssets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDisplayXSL">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayXSL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDisplayHTML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStateAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetCountyAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetCTVAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetServiceAreaAsJSONList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/DeleteAssetsByMetadataID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/CleanupData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetDetailsAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetDetailsAsList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetAssetByDbId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFAssetServiceHttpGet" type="tns:IFAssetServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetAssets">
+      <http:operation location="/GetAssets" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <http:operation location="/GetAssetsIDAndLocation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <http:operation location="/GetAssetsIDAndLocationAsJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <http:operation location="/GetAssetsIDAndLocationAsJSONList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <http:operation location="/AddAssets" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <http:operation location="/GetDisplayXSL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <http:operation location="/GetDisplayHTML" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <http:operation location="/GetStateAreaAsJSONList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <http:operation location="/GetCountyAreaAsJSONList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <http:operation location="/GetCTVAreaAsJSONList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <http:operation location="/GetServiceAreaAsJSONList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <http:operation location="/GetAssetDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <http:operation location="/DeleteAssetsByMetadataID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <http:operation location="/CleanupData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <http:operation location="/GetAssetDetailsAsJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <http:operation location="/GetAssetDetailsAsList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <http:operation location="/GetAssetByDbId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFAssetServiceHttpPost" type="tns:IFAssetServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetAssets">
+      <http:operation location="/GetAssets" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocation">
+      <http:operation location="/GetAssetsIDAndLocation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSON">
+      <http:operation location="/GetAssetsIDAndLocationAsJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetsIDAndLocationAsJSONList">
+      <http:operation location="/GetAssetsIDAndLocationAsJSONList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAssets">
+      <http:operation location="/AddAssets" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayXSL">
+      <http:operation location="/GetDisplayXSL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDisplayHTML">
+      <http:operation location="/GetDisplayHTML" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateAreaAsJSONList">
+      <http:operation location="/GetStateAreaAsJSONList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAreaAsJSONList">
+      <http:operation location="/GetCountyAreaAsJSONList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCTVAreaAsJSONList">
+      <http:operation location="/GetCTVAreaAsJSONList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceAreaAsJSONList">
+      <http:operation location="/GetServiceAreaAsJSONList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetails">
+      <http:operation location="/GetAssetDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAssetsByMetadataID">
+      <http:operation location="/DeleteAssetsByMetadataID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanupData">
+      <http:operation location="/CleanupData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsJSON">
+      <http:operation location="/GetAssetDetailsAsJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetDetailsAsList">
+      <http:operation location="/GetAssetDetailsAsList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssetByDbId">
+      <http:operation location="/GetAssetByDbId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IFAssetService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Use this service to manage assets.</wsdl:documentation>
+    <wsdl:port name="IFAssetServiceSoap" binding="tns:IFAssetServiceSoap">
+      <soap:address location="http://localhost/webservices/IFAssetService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFAssetServiceSoap12" binding="tns:IFAssetServiceSoap12">
+      <soap12:address location="http://localhost/webservices/IFAssetService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFAssetServiceHttpGet" binding="tns:IFAssetServiceHttpGet">
+      <http:address location="http://localhost/webservices/IFAssetService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFAssetServiceHttpPost" binding="tns:IFAssetServiceHttpPost">
+      <http:address location="http://localhost/webservices/IFAssetService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

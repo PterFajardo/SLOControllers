@@ -1,0 +1,3120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ifactorconsulting.com/webservices" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.ifactorconsulting.com/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Use this service to request and manage credential tokens for other IFactorWebServices</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ifactorconsulting.com/webservices">
+      <s:element name="GetOrganizationInfoForUserToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrganizationInfoForUserTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrganizationInfoForUserTokenResult" type="tns:IFOrgInfoStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IFOrgInfoStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fullname" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrganizationRecordInfoForUserToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrganizationRecordInfoForUserTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrganizationRecordInfoForUserTokenResult" type="tns:Organization" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Organization">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DbId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Configuration" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Domains" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncidentNotificationEmailList" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncidentNotificationUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceArea" type="tns:SqlGeometry" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoReplyEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusChangeEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManagementColumn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlNotificationRequestXsl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlNotificationResponseXsl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlNotificationRequestHeaders" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PoleNumberRegExpSearch" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PoleNumberRegExpReplace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TypeXsl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SqlGeometry">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STSrid" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrganizationValidatedUserToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrganizationValidatedUserTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrganizationValidatedUserTokenResult" type="tns:IFOrgInfoStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="expiryMinutes" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrustedOrganizationNames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrustedOrganizationNamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTrustedOrganizationNamesResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTrustingOrganizationNames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTrustingOrganizationNamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTrustingOrganizationNamesResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrganizationTrustToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="trustedOrganizationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrganizationTrustTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrganizationTrustTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterTrustToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="trustingOrganizationTrustToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterTrustTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegisterTrustTokenResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BreakTrustRelationship">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="organizationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BreakTrustRelationshipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BreakTrustRelationshipResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDetailsResult" type="tns:IFUserInfoStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IFUserInfoStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="phone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isAdmin" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUserDetailsAsJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetailsAsJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDetailsAsJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterOrganization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="organizationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fullOrganizationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminUsername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminPhone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterOrganizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterOrganizationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyOrganization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="infoToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyOrganizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyOrganizationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersResult" type="tns:ArrayOfIFUserInfoStructure" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIFUserInfoStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IFUserInfoStructure" nillable="true" type="tns:IFUserInfoStructure" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddAdminUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newAdminUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAdminUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAdminUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveAdminUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveAdminUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveAdminUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeUserPasswordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usernameToDelete" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usernameToRemove" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetUserPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetUserPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetUserPasswordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetConfigurations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="configurationAsJSON" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetConfigurationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetConfigurationsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIncidentNotificationInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="incidentNotificationEmailList" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="incidentNotificationURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIncidentNotificationInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetIncidentNotificationInformationResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentNotificationInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncidentNotificationInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncidentNotificationInformationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigurations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigurationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConfigurationsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyConfigurations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sourceOrganizationName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyConfigurationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CopyConfigurationsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="domains" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetDomainsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomains">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDomainsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDomainsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendInvitationEmails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emails" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shortMessage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendInvitationEmailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendInvitationEmailsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="invitationToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerifyUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="aUserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckUserExistResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusTypesByOrg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusTypesByOrgResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatusTypesByOrgResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusTypeRecordsByOrg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusTypeRecordsByOrgResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatusTypeRecordsByOrgResult" type="tns:ArrayOfStatusType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStatusType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StatusType" nillable="true" type="tns:StatusType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StatusType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DbId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStatusNamesByOrg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusNamesByOrgResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatusNamesByOrgResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagementCol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagementColResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManagementColResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IFOrgInfoStructure" nillable="true" type="tns:IFOrgInfoStructure" />
+      <s:element name="Organization" nillable="true" type="tns:Organization" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="IFUserInfoStructure" nillable="true" type="tns:IFUserInfoStructure" />
+      <s:element name="ArrayOfIFUserInfoStructure" nillable="true" type="tns:ArrayOfIFUserInfoStructure" />
+      <s:element name="ArrayOfStatusType" nillable="true" type="tns:ArrayOfStatusType" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOrganizationInfoForUserTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrganizationInfoForUserToken" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationInfoForUserTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrganizationInfoForUserTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationRecordInfoForUserTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrganizationRecordInfoForUserToken" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationRecordInfoForUserTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrganizationRecordInfoForUserTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationValidatedUserTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrganizationValidatedUserToken" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationValidatedUserTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrganizationValidatedUserTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserToken" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedOrganizationNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTrustedOrganizationNames" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedOrganizationNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTrustedOrganizationNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustingOrganizationNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTrustingOrganizationNames" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustingOrganizationNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTrustingOrganizationNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationTrustTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrganizationTrustToken" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationTrustTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrganizationTrustTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterTrustTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterTrustToken" />
+  </wsdl:message>
+  <wsdl:message name="RegisterTrustTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterTrustTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="BreakTrustRelationshipSoapIn">
+    <wsdl:part name="parameters" element="tns:BreakTrustRelationship" />
+  </wsdl:message>
+  <wsdl:message name="BreakTrustRelationshipSoapOut">
+    <wsdl:part name="parameters" element="tns:BreakTrustRelationshipResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsAsJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserDetailsAsJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsAsJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDetailsAsJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOrganizationSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterOrganization" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOrganizationSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOrganizationSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyOrganization" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOrganizationSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAdminUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAdminUser" />
+  </wsdl:message>
+  <wsdl:message name="AddAdminUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAdminUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveAdminUserSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveAdminUser" />
+  </wsdl:message>
+  <wsdl:message name="RemoveAdminUserSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveAdminUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeUserPassword" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeUserPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUser" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetUserPassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetUserPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetConfigurationsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetConfigurations" />
+  </wsdl:message>
+  <wsdl:message name="SetConfigurationsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetConfigurationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentNotificationInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:SetIncidentNotificationInformation" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentNotificationInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:SetIncidentNotificationInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentNotificationInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncidentNotificationInformation" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentNotificationInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncidentNotificationInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfigurations" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigurationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyConfigurationsSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyConfigurations" />
+  </wsdl:message>
+  <wsdl:message name="CopyConfigurationsSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyConfigurationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetDomains" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomains" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationEmailsSoapIn">
+    <wsdl:part name="parameters" element="tns:SendInvitationEmails" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationEmailsSoapOut">
+    <wsdl:part name="parameters" element="tns:SendInvitationEmailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyUserSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyUser" />
+  </wsdl:message>
+  <wsdl:message name="VerifyUserSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserExistSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckUserExist" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserExistSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckUserExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypesByOrgSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatusTypesByOrg" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypesByOrgSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatusTypesByOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypeRecordsByOrgSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatusTypeRecordsByOrg" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypeRecordsByOrgSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatusTypeRecordsByOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusNamesByOrgSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatusNamesByOrg" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusNamesByOrgSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatusNamesByOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManagementColSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManagementCol" />
+  </wsdl:message>
+  <wsdl:message name="GetManagementColSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManagementColResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationInfoForUserTokenHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationInfoForUserTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:IFOrgInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationRecordInfoForUserTokenHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationRecordInfoForUserTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:Organization" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationValidatedUserTokenHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationValidatedUserTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:IFOrgInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTokenHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="expiryMinutes" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedOrganizationNamesHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedOrganizationNamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustingOrganizationNamesHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustingOrganizationNamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationTrustTokenHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="trustedOrganizationName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationTrustTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterTrustTokenHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="trustingOrganizationTrustToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterTrustTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="BreakTrustRelationshipHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="organizationName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BreakTrustRelationshipHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:IFUserInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsAsJSONHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsAsJSONHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOrganizationHttpGetIn">
+    <wsdl:part name="organizationName" type="s:string" />
+    <wsdl:part name="fullOrganizationName" type="s:string" />
+    <wsdl:part name="adminFirstName" type="s:string" />
+    <wsdl:part name="adminLastName" type="s:string" />
+    <wsdl:part name="adminUsername" type="s:string" />
+    <wsdl:part name="adminPassword" type="s:string" />
+    <wsdl:part name="adminPhone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOrganizationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOrganizationHttpGetIn">
+    <wsdl:part name="infoToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOrganizationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFUserInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="AddAdminUserHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="newAdminUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAdminUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="RemoveAdminUserHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="adminUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveAdminUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="newPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="firstname" type="s:string" />
+    <wsdl:part name="lastname" type="s:string" />
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="phone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="usernameToDelete" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="usernameToRemove" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetConfigurationsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="configurationAsJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetConfigurationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentNotificationInformationHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentNotificationEmailList" type="s:string" />
+    <wsdl:part name="incidentNotificationURL" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentNotificationInformationHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentNotificationInformationHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentNotificationInformationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyConfigurationsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sourceOrganizationName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyConfigurationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="domains" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationEmailsHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="emails" type="s:string" />
+    <wsdl:part name="shortMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationEmailsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyUserHttpGetIn">
+    <wsdl:part name="invitationToken" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="phone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserExistHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="aUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserExistHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypesByOrgHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypesByOrgHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypeRecordsByOrgHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypeRecordsByOrgHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfStatusType" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusNamesByOrgHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusNamesByOrgHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetManagementColHttpGetIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetManagementColHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationInfoForUserTokenHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationInfoForUserTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:IFOrgInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationRecordInfoForUserTokenHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationRecordInfoForUserTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:Organization" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationValidatedUserTokenHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationValidatedUserTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:IFOrgInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTokenHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="expiryMinutes" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedOrganizationNamesHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustedOrganizationNamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustingOrganizationNamesHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrustingOrganizationNamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationTrustTokenHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="trustedOrganizationName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationTrustTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterTrustTokenHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="trustingOrganizationTrustToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterTrustTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="BreakTrustRelationshipHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="organizationName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BreakTrustRelationshipHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:IFUserInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsAsJSONHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailsAsJSONHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOrganizationHttpPostIn">
+    <wsdl:part name="organizationName" type="s:string" />
+    <wsdl:part name="fullOrganizationName" type="s:string" />
+    <wsdl:part name="adminFirstName" type="s:string" />
+    <wsdl:part name="adminLastName" type="s:string" />
+    <wsdl:part name="adminUsername" type="s:string" />
+    <wsdl:part name="adminPassword" type="s:string" />
+    <wsdl:part name="adminPhone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOrganizationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOrganizationHttpPostIn">
+    <wsdl:part name="infoToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyOrganizationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfIFUserInfoStructure" />
+  </wsdl:message>
+  <wsdl:message name="AddAdminUserHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="newAdminUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAdminUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="RemoveAdminUserHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="adminUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveAdminUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="newPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="firstname" type="s:string" />
+    <wsdl:part name="lastname" type="s:string" />
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="phone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="usernameToDelete" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="usernameToRemove" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SetConfigurationsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="configurationAsJSON" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetConfigurationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentNotificationInformationHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="incidentNotificationEmailList" type="s:string" />
+    <wsdl:part name="incidentNotificationURL" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetIncidentNotificationInformationHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentNotificationInformationHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIncidentNotificationInformationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyConfigurationsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="sourceOrganizationName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyConfigurationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="domains" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDomainsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationEmailsHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="emails" type="s:string" />
+    <wsdl:part name="shortMessage" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendInvitationEmailsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyUserHttpPostIn">
+    <wsdl:part name="invitationToken" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="phone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="VerifyUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserExistHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+    <wsdl:part name="aUserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserExistHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypesByOrgHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypesByOrgHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypeRecordsByOrgHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusTypeRecordsByOrgHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfStatusType" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusNamesByOrgHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusNamesByOrgHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetManagementColHttpPostIn">
+    <wsdl:part name="userToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetManagementColHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="IFCommonServiceSoap">
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the user record referred to by userToken.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationInfoForUserTokenSoapIn" />
+      <wsdl:output message="tns:GetOrganizationInfoForUserTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the user record.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationRecordInfoForUserTokenSoapIn" />
+      <wsdl:output message="tns:GetOrganizationRecordInfoForUserTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the usertoken.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationValidatedUserTokenSoapIn" />
+      <wsdl:output message="tns:GetOrganizationValidatedUserTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide a username, password and expiryMinutes and receive a token string in return.  This token string will be valid in other IFactorWebServices</wsdl:documentation>
+      <wsdl:input message="tns:GetUserTokenSoapIn" />
+      <wsdl:output message="tns:GetUserTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an array of strings representing all organizations trusted by the current user's organization.  Always includes self in the list.</wsdl:documentation>
+      <wsdl:input message="tns:GetTrustedOrganizationNamesSoapIn" />
+      <wsdl:output message="tns:GetTrustedOrganizationNamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an array of strings representing all organizations trusting the current user's organization.  Always includes self in the list.</wsdl:documentation>
+      <wsdl:input message="tns:GetTrustingOrganizationNamesSoapIn" />
+      <wsdl:output message="tns:GetTrustingOrganizationNamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a trust token that can be sent to other organizations to give them the key to view the current user's organization's data.  The trusted organizations need to register this trust token to complete the trust relationship.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationTrustTokenSoapIn" />
+      <wsdl:output message="tns:GetOrganizationTrustTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Register a trust token from another organization.  This allows the current user to see asset data of the trusting organization.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterTrustTokenSoapIn" />
+      <wsdl:output message="tns:RegisterTrustTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes all organizational trust relationships between the organization referenced by userToken and organizationName.</wsdl:documentation>
+      <wsdl:input message="tns:BreakTrustRelationshipSoapIn" />
+      <wsdl:output message="tns:BreakTrustRelationshipSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the User information for the username assigned to this token.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailsSoapIn" />
+      <wsdl:output message="tns:GetUserDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the User information for the username assigned to this token as a JSON string.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailsAsJSONSoapIn" />
+      <wsdl:output message="tns:GetUserDetailsAsJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gathers information about a new organization and then sends a verification e-mail to complete the registration.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterOrganizationSoapIn" />
+      <wsdl:output message="tns:RegisterOrganizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates the new organization based on the infoToken.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyOrganizationSoapIn" />
+      <wsdl:output message="tns:VerifyOrganizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of usernames for the current organization</wsdl:documentation>
+      <wsdl:input message="tns:GetUsersSoapIn" />
+      <wsdl:output message="tns:GetUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds newAdminUserName to userToken's organization.  This only works if userToken has 'Admin' rights itself and if newAdminUserName is a valid name for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:AddAdminUserSoapIn" />
+      <wsdl:output message="tns:AddAdminUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes adminUserName from userToken's organization.  This only works if userToken has 'Admin' rights itself and if adminUserName is a valid name for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveAdminUserSoapIn" />
+      <wsdl:output message="tns:RemoveAdminUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the password for the given token's user.</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserPasswordSoapIn" />
+      <wsdl:output message="tns:ChangeUserPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new user account.  Need to provide an existing userToken so that we know which organization the new user account is being created for.</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserSoapIn" />
+      <wsdl:output message="tns:CreateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a user account. </wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserSoapIn" />
+      <wsdl:output message="tns:DeleteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user assigned to userToken's organization and assigns it to the defaultOrganization.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserSoapIn" />
+      <wsdl:output message="tns:RemoveUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resets the password for 'username'.  A note will be sent to the e-mail address on file with a new password.</wsdl:documentation>
+      <wsdl:input message="tns:ResetUserPasswordSoapIn" />
+      <wsdl:output message="tns:ResetUserPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates the organization's configurationAsJSON column</wsdl:documentation>
+      <wsdl:input message="tns:SetConfigurationsSoapIn" />
+      <wsdl:output message="tns:SetConfigurationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates the email/URL incident notification properties for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentNotificationInformationSoapIn" />
+      <wsdl:output message="tns:SetIncidentNotificationInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">gets the email/URL incident notification properties for userToken's organization.  Returns a JSON String.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentNotificationInformationSoapIn" />
+      <wsdl:output message="tns:GetIncidentNotificationInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves the current user's organization configuration as a string.</wsdl:documentation>
+      <wsdl:input message="tns:GetConfigurationsSoapIn" />
+      <wsdl:output message="tns:GetConfigurationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies configurations from sourceOrganizationName to the organization represented by organizationToken.  Only suitably authorized userToken are permitted to perform this action.</wsdl:documentation>
+      <wsdl:input message="tns:CopyConfigurationsSoapIn" />
+      <wsdl:output message="tns:CopyConfigurationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sets the organization's domains column</wsdl:documentation>
+      <wsdl:input message="tns:SetDomainsSoapIn" />
+      <wsdl:output message="tns:SetDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the organization's domains column.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsSoapIn" />
+      <wsdl:output message="tns:GetDomainsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send invitations to join the current organization to all the e-mail addresses in EMAILS string (comma-delimited).</wsdl:documentation>
+      <wsdl:input message="tns:SendInvitationEmailsSoapIn" />
+      <wsdl:output message="tns:SendInvitationEmailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Registers a user based on the invitation defined by invitationToken.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyUserSoapIn" />
+      <wsdl:output message="tns:VerifyUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Check if the username exist in database</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserExistSoapIn" />
+      <wsdl:output message="tns:CheckUserExistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status types for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusTypesByOrgSoapIn" />
+      <wsdl:output message="tns:GetStatusTypesByOrgSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status types for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusTypeRecordsByOrgSoapIn" />
+      <wsdl:output message="tns:GetStatusTypeRecordsByOrgSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status type names for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusNamesByOrgSoapIn" />
+      <wsdl:output message="tns:GetStatusNamesByOrgSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ManagementCol</wsdl:documentation>
+      <wsdl:input message="tns:GetManagementColSoapIn" />
+      <wsdl:output message="tns:GetManagementColSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IFCommonServiceHttpGet">
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the user record referred to by userToken.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationInfoForUserTokenHttpGetIn" />
+      <wsdl:output message="tns:GetOrganizationInfoForUserTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the user record.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationRecordInfoForUserTokenHttpGetIn" />
+      <wsdl:output message="tns:GetOrganizationRecordInfoForUserTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the usertoken.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationValidatedUserTokenHttpGetIn" />
+      <wsdl:output message="tns:GetOrganizationValidatedUserTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide a username, password and expiryMinutes and receive a token string in return.  This token string will be valid in other IFactorWebServices</wsdl:documentation>
+      <wsdl:input message="tns:GetUserTokenHttpGetIn" />
+      <wsdl:output message="tns:GetUserTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an array of strings representing all organizations trusted by the current user's organization.  Always includes self in the list.</wsdl:documentation>
+      <wsdl:input message="tns:GetTrustedOrganizationNamesHttpGetIn" />
+      <wsdl:output message="tns:GetTrustedOrganizationNamesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an array of strings representing all organizations trusting the current user's organization.  Always includes self in the list.</wsdl:documentation>
+      <wsdl:input message="tns:GetTrustingOrganizationNamesHttpGetIn" />
+      <wsdl:output message="tns:GetTrustingOrganizationNamesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a trust token that can be sent to other organizations to give them the key to view the current user's organization's data.  The trusted organizations need to register this trust token to complete the trust relationship.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationTrustTokenHttpGetIn" />
+      <wsdl:output message="tns:GetOrganizationTrustTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Register a trust token from another organization.  This allows the current user to see asset data of the trusting organization.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterTrustTokenHttpGetIn" />
+      <wsdl:output message="tns:RegisterTrustTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes all organizational trust relationships between the organization referenced by userToken and organizationName.</wsdl:documentation>
+      <wsdl:input message="tns:BreakTrustRelationshipHttpGetIn" />
+      <wsdl:output message="tns:BreakTrustRelationshipHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the User information for the username assigned to this token.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailsHttpGetIn" />
+      <wsdl:output message="tns:GetUserDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the User information for the username assigned to this token as a JSON string.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailsAsJSONHttpGetIn" />
+      <wsdl:output message="tns:GetUserDetailsAsJSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gathers information about a new organization and then sends a verification e-mail to complete the registration.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterOrganizationHttpGetIn" />
+      <wsdl:output message="tns:RegisterOrganizationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates the new organization based on the infoToken.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyOrganizationHttpGetIn" />
+      <wsdl:output message="tns:VerifyOrganizationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of usernames for the current organization</wsdl:documentation>
+      <wsdl:input message="tns:GetUsersHttpGetIn" />
+      <wsdl:output message="tns:GetUsersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds newAdminUserName to userToken's organization.  This only works if userToken has 'Admin' rights itself and if newAdminUserName is a valid name for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:AddAdminUserHttpGetIn" />
+      <wsdl:output message="tns:AddAdminUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes adminUserName from userToken's organization.  This only works if userToken has 'Admin' rights itself and if adminUserName is a valid name for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveAdminUserHttpGetIn" />
+      <wsdl:output message="tns:RemoveAdminUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the password for the given token's user.</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserPasswordHttpGetIn" />
+      <wsdl:output message="tns:ChangeUserPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new user account.  Need to provide an existing userToken so that we know which organization the new user account is being created for.</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserHttpGetIn" />
+      <wsdl:output message="tns:CreateUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a user account. </wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserHttpGetIn" />
+      <wsdl:output message="tns:DeleteUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user assigned to userToken's organization and assigns it to the defaultOrganization.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserHttpGetIn" />
+      <wsdl:output message="tns:RemoveUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resets the password for 'username'.  A note will be sent to the e-mail address on file with a new password.</wsdl:documentation>
+      <wsdl:input message="tns:ResetUserPasswordHttpGetIn" />
+      <wsdl:output message="tns:ResetUserPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates the organization's configurationAsJSON column</wsdl:documentation>
+      <wsdl:input message="tns:SetConfigurationsHttpGetIn" />
+      <wsdl:output message="tns:SetConfigurationsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates the email/URL incident notification properties for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentNotificationInformationHttpGetIn" />
+      <wsdl:output message="tns:SetIncidentNotificationInformationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">gets the email/URL incident notification properties for userToken's organization.  Returns a JSON String.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentNotificationInformationHttpGetIn" />
+      <wsdl:output message="tns:GetIncidentNotificationInformationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves the current user's organization configuration as a string.</wsdl:documentation>
+      <wsdl:input message="tns:GetConfigurationsHttpGetIn" />
+      <wsdl:output message="tns:GetConfigurationsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies configurations from sourceOrganizationName to the organization represented by organizationToken.  Only suitably authorized userToken are permitted to perform this action.</wsdl:documentation>
+      <wsdl:input message="tns:CopyConfigurationsHttpGetIn" />
+      <wsdl:output message="tns:CopyConfigurationsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sets the organization's domains column</wsdl:documentation>
+      <wsdl:input message="tns:SetDomainsHttpGetIn" />
+      <wsdl:output message="tns:SetDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the organization's domains column.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsHttpGetIn" />
+      <wsdl:output message="tns:GetDomainsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send invitations to join the current organization to all the e-mail addresses in EMAILS string (comma-delimited).</wsdl:documentation>
+      <wsdl:input message="tns:SendInvitationEmailsHttpGetIn" />
+      <wsdl:output message="tns:SendInvitationEmailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Registers a user based on the invitation defined by invitationToken.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyUserHttpGetIn" />
+      <wsdl:output message="tns:VerifyUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Check if the username exist in database</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserExistHttpGetIn" />
+      <wsdl:output message="tns:CheckUserExistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status types for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusTypesByOrgHttpGetIn" />
+      <wsdl:output message="tns:GetStatusTypesByOrgHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status types for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusTypeRecordsByOrgHttpGetIn" />
+      <wsdl:output message="tns:GetStatusTypeRecordsByOrgHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status type names for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusNamesByOrgHttpGetIn" />
+      <wsdl:output message="tns:GetStatusNamesByOrgHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ManagementCol</wsdl:documentation>
+      <wsdl:input message="tns:GetManagementColHttpGetIn" />
+      <wsdl:output message="tns:GetManagementColHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IFCommonServiceHttpPost">
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the user record referred to by userToken.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationInfoForUserTokenHttpPostIn" />
+      <wsdl:output message="tns:GetOrganizationInfoForUserTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the user record.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationRecordInfoForUserTokenHttpPostIn" />
+      <wsdl:output message="tns:GetOrganizationRecordInfoForUserTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the organization record associated with the usertoken.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationValidatedUserTokenHttpPostIn" />
+      <wsdl:output message="tns:GetOrganizationValidatedUserTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide a username, password and expiryMinutes and receive a token string in return.  This token string will be valid in other IFactorWebServices</wsdl:documentation>
+      <wsdl:input message="tns:GetUserTokenHttpPostIn" />
+      <wsdl:output message="tns:GetUserTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an array of strings representing all organizations trusted by the current user's organization.  Always includes self in the list.</wsdl:documentation>
+      <wsdl:input message="tns:GetTrustedOrganizationNamesHttpPostIn" />
+      <wsdl:output message="tns:GetTrustedOrganizationNamesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an array of strings representing all organizations trusting the current user's organization.  Always includes self in the list.</wsdl:documentation>
+      <wsdl:input message="tns:GetTrustingOrganizationNamesHttpPostIn" />
+      <wsdl:output message="tns:GetTrustingOrganizationNamesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a trust token that can be sent to other organizations to give them the key to view the current user's organization's data.  The trusted organizations need to register this trust token to complete the trust relationship.</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationTrustTokenHttpPostIn" />
+      <wsdl:output message="tns:GetOrganizationTrustTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Register a trust token from another organization.  This allows the current user to see asset data of the trusting organization.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterTrustTokenHttpPostIn" />
+      <wsdl:output message="tns:RegisterTrustTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes all organizational trust relationships between the organization referenced by userToken and organizationName.</wsdl:documentation>
+      <wsdl:input message="tns:BreakTrustRelationshipHttpPostIn" />
+      <wsdl:output message="tns:BreakTrustRelationshipHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the User information for the username assigned to this token.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailsHttpPostIn" />
+      <wsdl:output message="tns:GetUserDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Return the User information for the username assigned to this token as a JSON string.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailsAsJSONHttpPostIn" />
+      <wsdl:output message="tns:GetUserDetailsAsJSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gathers information about a new organization and then sends a verification e-mail to complete the registration.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterOrganizationHttpPostIn" />
+      <wsdl:output message="tns:RegisterOrganizationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates the new organization based on the infoToken.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyOrganizationHttpPostIn" />
+      <wsdl:output message="tns:VerifyOrganizationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of usernames for the current organization</wsdl:documentation>
+      <wsdl:input message="tns:GetUsersHttpPostIn" />
+      <wsdl:output message="tns:GetUsersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds newAdminUserName to userToken's organization.  This only works if userToken has 'Admin' rights itself and if newAdminUserName is a valid name for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:AddAdminUserHttpPostIn" />
+      <wsdl:output message="tns:AddAdminUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes adminUserName from userToken's organization.  This only works if userToken has 'Admin' rights itself and if adminUserName is a valid name for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveAdminUserHttpPostIn" />
+      <wsdl:output message="tns:RemoveAdminUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the password for the given token's user.</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserPasswordHttpPostIn" />
+      <wsdl:output message="tns:ChangeUserPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new user account.  Need to provide an existing userToken so that we know which organization the new user account is being created for.</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserHttpPostIn" />
+      <wsdl:output message="tns:CreateUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a user account. </wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserHttpPostIn" />
+      <wsdl:output message="tns:DeleteUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user assigned to userToken's organization and assigns it to the defaultOrganization.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserHttpPostIn" />
+      <wsdl:output message="tns:RemoveUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Resets the password for 'username'.  A note will be sent to the e-mail address on file with a new password.</wsdl:documentation>
+      <wsdl:input message="tns:ResetUserPasswordHttpPostIn" />
+      <wsdl:output message="tns:ResetUserPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates the organization's configurationAsJSON column</wsdl:documentation>
+      <wsdl:input message="tns:SetConfigurationsHttpPostIn" />
+      <wsdl:output message="tns:SetConfigurationsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates the email/URL incident notification properties for userToken's organization.</wsdl:documentation>
+      <wsdl:input message="tns:SetIncidentNotificationInformationHttpPostIn" />
+      <wsdl:output message="tns:SetIncidentNotificationInformationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">gets the email/URL incident notification properties for userToken's organization.  Returns a JSON String.</wsdl:documentation>
+      <wsdl:input message="tns:GetIncidentNotificationInformationHttpPostIn" />
+      <wsdl:output message="tns:GetIncidentNotificationInformationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves the current user's organization configuration as a string.</wsdl:documentation>
+      <wsdl:input message="tns:GetConfigurationsHttpPostIn" />
+      <wsdl:output message="tns:GetConfigurationsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies configurations from sourceOrganizationName to the organization represented by organizationToken.  Only suitably authorized userToken are permitted to perform this action.</wsdl:documentation>
+      <wsdl:input message="tns:CopyConfigurationsHttpPostIn" />
+      <wsdl:output message="tns:CopyConfigurationsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sets the organization's domains column</wsdl:documentation>
+      <wsdl:input message="tns:SetDomainsHttpPostIn" />
+      <wsdl:output message="tns:SetDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the organization's domains column.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainsHttpPostIn" />
+      <wsdl:output message="tns:GetDomainsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send invitations to join the current organization to all the e-mail addresses in EMAILS string (comma-delimited).</wsdl:documentation>
+      <wsdl:input message="tns:SendInvitationEmailsHttpPostIn" />
+      <wsdl:output message="tns:SendInvitationEmailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Registers a user based on the invitation defined by invitationToken.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyUserHttpPostIn" />
+      <wsdl:output message="tns:VerifyUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Check if the username exist in database</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserExistHttpPostIn" />
+      <wsdl:output message="tns:CheckUserExistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status types for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusTypesByOrgHttpPostIn" />
+      <wsdl:output message="tns:GetStatusTypesByOrgHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status types for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusTypeRecordsByOrgHttpPostIn" />
+      <wsdl:output message="tns:GetStatusTypeRecordsByOrgHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get the list of status type names for obganization from usertoken</wsdl:documentation>
+      <wsdl:input message="tns:GetStatusNamesByOrgHttpPostIn" />
+      <wsdl:output message="tns:GetStatusNamesByOrgHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ManagementCol</wsdl:documentation>
+      <wsdl:input message="tns:GetManagementColHttpPostIn" />
+      <wsdl:output message="tns:GetManagementColHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IFCommonServiceSoap" type="tns:IFCommonServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationInfoForUserToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationRecordInfoForUserToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationValidatedUserToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUserToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetTrustedOrganizationNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetTrustingOrganizationNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationTrustToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/RegisterTrustToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/BreakTrustRelationship" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUserDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUserDetailsAsJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/RegisterOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/VerifyOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/AddAdminUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/RemoveAdminUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ChangeUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/RemoveUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/ResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetConfigurations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetIncidentNotificationInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentNotificationInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetConfigurations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/CopyConfigurations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SetDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDomains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/SendInvitationEmails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/VerifyUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/CheckUserExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStatusTypesByOrg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStatusTypeRecordsByOrg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStatusNamesByOrg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <soap:operation soapAction="http://www.ifactorconsulting.com/webservices/GetManagementCol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFCommonServiceSoap12" type="tns:IFCommonServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationInfoForUserToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationRecordInfoForUserToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationValidatedUserToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUserToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetTrustedOrganizationNames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetTrustingOrganizationNames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetOrganizationTrustToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/RegisterTrustToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/BreakTrustRelationship" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUserDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUserDetailsAsJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/RegisterOrganization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/VerifyOrganization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/AddAdminUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/RemoveAdminUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ChangeUserPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/RemoveUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/ResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetConfigurations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetIncidentNotificationInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetIncidentNotificationInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetConfigurations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/CopyConfigurations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SetDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/SendInvitationEmails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/VerifyUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/CheckUserExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStatusTypesByOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStatusTypeRecordsByOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetStatusNamesByOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <soap12:operation soapAction="http://www.ifactorconsulting.com/webservices/GetManagementCol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFCommonServiceHttpGet" type="tns:IFCommonServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <http:operation location="/GetOrganizationInfoForUserToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <http:operation location="/GetOrganizationRecordInfoForUserToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <http:operation location="/GetOrganizationValidatedUserToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <http:operation location="/GetUserToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <http:operation location="/GetTrustedOrganizationNames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <http:operation location="/GetTrustingOrganizationNames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <http:operation location="/GetOrganizationTrustToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <http:operation location="/RegisterTrustToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <http:operation location="/BreakTrustRelationship" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <http:operation location="/GetUserDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <http:operation location="/GetUserDetailsAsJSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <http:operation location="/RegisterOrganization" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <http:operation location="/VerifyOrganization" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <http:operation location="/GetUsers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <http:operation location="/AddAdminUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <http:operation location="/RemoveAdminUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <http:operation location="/ChangeUserPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <http:operation location="/CreateUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <http:operation location="/DeleteUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <http:operation location="/RemoveUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <http:operation location="/ResetUserPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <http:operation location="/SetConfigurations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <http:operation location="/SetIncidentNotificationInformation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <http:operation location="/GetIncidentNotificationInformation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <http:operation location="/GetConfigurations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <http:operation location="/CopyConfigurations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <http:operation location="/SetDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <http:operation location="/GetDomains" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <http:operation location="/SendInvitationEmails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <http:operation location="/VerifyUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <http:operation location="/CheckUserExist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <http:operation location="/GetStatusTypesByOrg" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <http:operation location="/GetStatusTypeRecordsByOrg" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <http:operation location="/GetStatusNamesByOrg" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <http:operation location="/GetManagementCol" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IFCommonServiceHttpPost" type="tns:IFCommonServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetOrganizationInfoForUserToken">
+      <http:operation location="/GetOrganizationInfoForUserToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRecordInfoForUserToken">
+      <http:operation location="/GetOrganizationRecordInfoForUserToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationValidatedUserToken">
+      <http:operation location="/GetOrganizationValidatedUserToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserToken">
+      <http:operation location="/GetUserToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustedOrganizationNames">
+      <http:operation location="/GetTrustedOrganizationNames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrustingOrganizationNames">
+      <http:operation location="/GetTrustingOrganizationNames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationTrustToken">
+      <http:operation location="/GetOrganizationTrustToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterTrustToken">
+      <http:operation location="/RegisterTrustToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakTrustRelationship">
+      <http:operation location="/BreakTrustRelationship" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetails">
+      <http:operation location="/GetUserDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailsAsJSON">
+      <http:operation location="/GetUserDetailsAsJSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrganization">
+      <http:operation location="/RegisterOrganization" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyOrganization">
+      <http:operation location="/VerifyOrganization" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <http:operation location="/GetUsers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAdminUser">
+      <http:operation location="/AddAdminUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdminUser">
+      <http:operation location="/RemoveAdminUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <http:operation location="/ChangeUserPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <http:operation location="/CreateUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <http:operation location="/DeleteUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <http:operation location="/RemoveUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <http:operation location="/ResetUserPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetConfigurations">
+      <http:operation location="/SetConfigurations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIncidentNotificationInformation">
+      <http:operation location="/SetIncidentNotificationInformation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncidentNotificationInformation">
+      <http:operation location="/GetIncidentNotificationInformation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurations">
+      <http:operation location="/GetConfigurations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyConfigurations">
+      <http:operation location="/CopyConfigurations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDomains">
+      <http:operation location="/SetDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomains">
+      <http:operation location="/GetDomains" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvitationEmails">
+      <http:operation location="/SendInvitationEmails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyUser">
+      <http:operation location="/VerifyUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserExist">
+      <http:operation location="/CheckUserExist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypesByOrg">
+      <http:operation location="/GetStatusTypesByOrg" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusTypeRecordsByOrg">
+      <http:operation location="/GetStatusTypeRecordsByOrg" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusNamesByOrg">
+      <http:operation location="/GetStatusNamesByOrg" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementCol">
+      <http:operation location="/GetManagementCol" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IFCommonService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Use this service to request and manage credential tokens for other IFactorWebServices</wsdl:documentation>
+    <wsdl:port name="IFCommonServiceSoap" binding="tns:IFCommonServiceSoap">
+      <soap:address location="http://localhost/webservices/IFCommonService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFCommonServiceSoap12" binding="tns:IFCommonServiceSoap12">
+      <soap12:address location="http://localhost/webservices/IFCommonService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFCommonServiceHttpGet" binding="tns:IFCommonServiceHttpGet">
+      <http:address location="http://localhost/webservices/IFCommonService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IFCommonServiceHttpPost" binding="tns:IFCommonServiceHttpPost">
+      <http:address location="http://localhost/webservices/IFCommonService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
